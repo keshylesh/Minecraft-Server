@@ -1,0 +1,19 @@
+services:
+  mcserver:
+    image: mcserver:latest
+    tty: true
+    stdin_open: true
+
+    # left port is your local port, change it as necessary
+    ports:
+      - "25563:25565"
+
+    # EULA should be true to accept it
+    # SEED can be modified to be anything
+    environment:
+      EULA: "true"
+      SEED: "-7203507603979108244"
+
+    # keeps local copy of server data for modifications
+    volumes:
+      - ./data:/data
