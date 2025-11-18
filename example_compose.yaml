@@ -1,3 +1,4 @@
+#NOTE: Rename to compose.yaml for autodetection
 services:
   mcserver:
     image: mcserver:latest
