@@ -1,9 +1,14 @@
 #!/bin/sh
 
-cd "$(dirname "$0")"
+# Run server as local user to preserve permissions
+su - mcserver << EOF
 
+cd "$(dirname "$0")"
 if ! [[ -f "server.properties" ]]; then
-    java -Xms1024M -Xmx2048M -jar server.jar nogui
+    # Run server to generate files
+    java -jar server.jar nogui
+
+    # Change EULA, seed, and difficulty according to compose.yaml env variables 
     sed -i "s|eula=false|eula=$EULA|" eula.txt
 
     if ! [[ -z "${SEED}" ]]; then
@@ -15,4 +20,7 @@ if ! [[ -f "server.properties" ]]; then
     fi
 fi
 
-exec java -Xms1024M -Xmx2048M -jar server.jar nogui
+# Run server
+java -Xms1024M -Xmx2048M -jar server.jar nogui
+
+EOF
