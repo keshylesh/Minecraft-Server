@@ -11,9 +11,11 @@ services:
 
     # EULA should be true to accept it
     # SEED can be modified to be anything
+    # DIFFICULTY can be "peaceful", "easy", "normal", "hard"
     environment:
       EULA: "true"
       SEED: "-7203507603979108244"
+      DIFFICULTY: "hard"
 
     # keeps local copy of server data for modifications
     volumes:
